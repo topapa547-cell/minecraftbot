@@ -13,7 +13,7 @@ app.listen(process.env.PORT || 3000, () => {
 // Asli Minecraft Bot Code
 function startBot() {
     const bot = mineflayer.createBot({
-        host: 'Suryansh123451.aternos.me', // ⚠️ Yahan apne Aternos ka IP daal
+        host: 'chub.aternos.host', // ⚠️ Yahan apne Aternos ka IP daal
         port: 25565,                         // Java port hamesha 25565 hota hai
         username: '247_HackerBot',            // Bot ka game name
         version: false                        // Auto-detect version
