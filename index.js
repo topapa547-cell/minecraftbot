@@ -1,45 +1,70 @@
-const mineflayer = require('mineflayer');
-const express = require('express');
-const app = express();
+const mineflayer = require("mineflayer");
 
-// Render Web Application ko 24/7 jagaye rakhne ke liye webpage
-app.get('/', (req, res) => {
-    res.send('HackerBot is fully awake and running!');
-});
-app.listen(process.env.PORT || 3000, () => {
-    console.log('Web server is ready.');
-});
+const HOST = process.env.MC_HOST || "Suryansh123451.aternos.me";
+const PORT = Number(process.env.MC_PORT || 16356);
+const BOT_USERNAME = process.env.BOT_USERNAME || "RenderBot";
 
-// Asli Minecraft Hacker Bot Code
+let bot;
+let reconnecting = false;
+
 function startBot() {
-    console.log('🚀 Connecting to Aternos via Port Bypass...');
+  console.log("🚀 Starting Mineflayer bot...");
+  console.log(`🌐 Server: ${HOST}:${PORT}`);
 
-    const bot = mineflayer.createBot({
-        host: 'Suryansh123451.aternos.me', // ✨ Main server address (DynIP mat dalo)
-        port: 25565,                        // ⚠️ Java connection ke liye hamesha 25565 rakho
-        username: '247_HackerBot',          // Bot ka in-game naam
-        version: '1.20.4',                  // ⚠️ APNA GAME VERSION YAHAN BADAL DENA (e.g., '1.20.1', '1.21' etc.)
-        auth: 'offline',                    // Cracked configuration bypass
-        checkTimeoutInterval: 60000         // Connection timeout delay hack
-    });
+  bot = mineflayer.createBot({
+    host: HOST,
+    port: PORT,
+    username: BOT_USERNAME,
+    version: false,
+    auth: "offline"
+  });
 
-    bot.on('login', () => {
-        console.log('💚 Success: Bot Aternos panel me authenticate ho gaya hai!');
-    });
+  bot.once("spawn", () => {
+    console.log("✅ Bot successfully joined the server!");
 
-    bot.on('spawn', () => {
-        console.log('🎮 BOOOM! Bot successfully server me ghus gaya aur online khada hai!');
-    });
+    bot.chat("Hello! I am online 🤖");
+  });
 
-    bot.on('end', (reason) => {
-        console.log(`🔌 Connection Lost due to: ${reason}. Retrying in 10 seconds...`);
-        setTimeout(startBot, 10000); // 10 seconds auto-reconnect trigger
-    });
+  bot.on("chat", (username, message) => {
+    if (username === bot.username) return;
 
-    bot.on('error', (err) => {
-        console.log('❌ Catch Error Log: ', err.message);
-    });
+    console.log(`💬 ${username}: ${message}`);
+
+    if (message.toLowerCase() === "bot") {
+      bot.chat("Yes bro, I am online! 🤖");
+    }
+  });
+
+  bot.on("kicked", (reason) => {
+    console.log("❌ Bot kicked:", reason);
+  });
+
+  bot.on("error", (err) => {
+    console.log("⚠️ Minecraft error:", err.message);
+  });
+
+  bot.on("end", () => {
+    console.log("🔴 Bot disconnected.");
+
+    if (!reconnecting) {
+      reconnecting = true;
+
+      console.log("🔄 Reconnecting in 15 seconds...");
+
+      setTimeout(() => {
+        reconnecting = false;
+        startBot();
+      }, 15000);
+    }
+  });
 }
 
-// 5 second ka pause taaki pehle Render ka web service stable ho jaye
-setTimeout(startBot, 5000);
+process.on("uncaughtException", (err) => {
+  console.log("💥 Uncaught error:", err);
+});
+
+process.on("unhandledRejection", (err) => {
+  console.log("💥 Unhandled rejection:", err);
+});
+
+startBot();
