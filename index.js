@@ -2,7 +2,7 @@ const mineflayer = require('mineflayer');
 const express = require('express');
 const app = express();
 
-// Render ko active rakhne ke liye webpage
+// Render Web Application ko 24/7 jagaye rakhne ke liye webpage
 app.get('/', (req, res) => {
     res.send('HackerBot is fully awake and running!');
 });
@@ -10,36 +10,36 @@ app.listen(process.env.PORT || 3000, () => {
     console.log('Web server is ready.');
 });
 
-// Asli Minecraft Bot Code
+// Asli Minecraft Hacker Bot Code
 function startBot() {
-    console.log('Bot connection attempt shuru ho raha hai...');
-    
+    console.log('🚀 Connecting to Aternos via Port Bypass...');
+
     const bot = mineflayer.createBot({
-        host: 'chub.aternos.host',           // ✨ Tumhara dynamic host
-        port: 16356,                         // ⚠️ Aternos ka diya hua numeric port daal diya!
-        username: '247_HackerBot',            
-        version: '1.20.4',                   // ⚠️ APNA MINECRAFT VERSION YAHAN SAHI SE LIKHO (e.g. '1.20.1', '1.21')
-        auth: 'offline'                      // Direct batado cracked server hai
+        host: 'Suryansh123451.aternos.me', // ✨ Main server address (DynIP mat dalo)
+        port: 25565,                        // ⚠️ Java connection ke liye hamesha 25565 rakho
+        username: '247_HackerBot',          // Bot ka in-game naam
+        version: '1.20.4',                  // ⚠️ APNA GAME VERSION YAHAN BADAL DENA (e.g., '1.20.1', '1.21' etc.)
+        auth: 'offline',                    // Cracked configuration bypass
+        checkTimeoutInterval: 60000         // Connection timeout delay hack
     });
 
     bot.on('login', () => {
-        console.log('🚀 Booom! Bot successfully server me login ho gaya hai!');
+        console.log('💚 Success: Bot Aternos panel me authenticate ho gaya hai!');
     });
 
     bot.on('spawn', () => {
-        console.log('🤖 Bot successfully world ke andar khada hai!');
+        console.log('🎮 BOOOM! Bot successfully server me ghus gaya aur online khada hai!');
     });
 
-    // Auto-reconnect loop agar kick ho jaye
     bot.on('end', (reason) => {
-        console.log(`Bot disconnect hua. Reason: ${reason}. 15 seconds me dobara ghusega...`);
-        setTimeout(startBot, 15000); 
+        console.log(`🔌 Connection Lost due to: ${reason}. Retrying in 10 seconds...`);
+        setTimeout(startBot, 10000); // 10 seconds auto-reconnect trigger
     });
 
     bot.on('error', (err) => {
-        console.log('⚠️ Error physical catch hua: ', err.message);
+        console.log('❌ Catch Error Log: ', err.message);
     });
 }
 
-// Chota buffer taaki web server pehle up ho jaye
+// 5 second ka pause taaki pehle Render ka web service stable ho jaye
 setTimeout(startBot, 5000);
