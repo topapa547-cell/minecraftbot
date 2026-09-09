@@ -1,0 +1,2 @@
+# minecraftbot
+MINECRAFT BOT HOSTING
