@@ -14,7 +14,7 @@ app.listen(process.env.PORT || 3000, () => {
 function startBot() {
     const bot = mineflayer.createBot({
         host: 'Suryansh123451.aternos.me:16356', // ⚠️ Yahan apne Aternos ka IP daal
-        port: 16356,                         // Java port hamesha 25565 hota hai
+        port: 25556,                         // Java port hamesha 25565 hota hai
         username: '247_HackerBot',            // Bot ka game name
         version: false                        // Auto-detect version
     });
