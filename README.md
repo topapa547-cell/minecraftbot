@@ -27,8 +27,8 @@ Your updated [`index.js`](./index.js) has:
    - **Start Command**: `node index.js`
    - **Instance Type**: Free
 6. In **Environment Variables**, add:
-   - `MC_HOST`: `Suryansh123451.aternos.me` (or your server domain)
-   - `MC_PORT`: `16356` (or your current server port)
+   - `MC_HOST`: `topapa12-ATsD.aternos.me` (or `knifefish.aternos.host`)
+   - `MC_PORT`: `64153`
    - `BOT_USERNAME`: `RenderBot`
 
 ### Keep Render Awake 24/7:
