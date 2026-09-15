@@ -2,8 +2,8 @@ const mineflayer = require("mineflayer");
 const http = require("http");
 
 // Configuration via environment variables with defaults
-const HOST = process.env.MC_HOST || "Suryansh123451.aternos.me";
-const PORT = Number(process.env.MC_PORT || 16356);
+const HOST = process.env.MC_HOST || "topapa12-ATsD.aternos.me";
+const PORT = Number(process.env.MC_PORT || 64153);
 const BOT_USERNAME = process.env.BOT_USERNAME || "RenderBot";
 const WEB_PORT = Number(process.env.PORT || 10000);
 
