@@ -115,17 +115,25 @@ function startBot() {
     console.log("");
     console.log("================================");
     console.log("🚀 Starting Mineflayer Anti-AFK Bot...");
-    console.log(`🌐 Target Minecraft: ${HOST}:${PORT}`);
+    // Aternos dynamic IP (knifefish.aternos.host) bypasses SRV lookup issues on Linux cloud containers
+    const connectHost = process.env.MC_HOST || "knifefish.aternos.host";
+
+    console.log(`🌐 Connecting to Minecraft: ${connectHost}:${PORT}`);
     console.log(`🤖 Bot Name: ${BOT_USERNAME}`);
     console.log("================================");
 
     bot = mineflayer.createBot({
-        host: HOST,
+        host: connectHost,
         port: PORT,
         username: BOT_USERNAME,
         auth: "offline",
         version: false, // auto-detect version
-        connectTimeout: 30000
+        connectTimeout: 45000,
+        checkTimeoutInterval: 60000
+    });
+
+    bot.on("connect", () => {
+        console.log("🔗 TCP socket connected to Aternos, completing handshake...");
     });
 
     bot.once("spawn", () => {
